@@ -1,0 +1,696 @@
+{% load static %}
+
+{% if messages %}
+    {% for message in messages %}
+      <div{% if message.tags %} class="alert alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+  
+  
+<div class="tab-pane fade" id="setting-menu">
+    <!-- Profile sidebar -->
+    <div class="sidebar-content active slimscroll">
+        <div class="slimscroll">
+            <div class="chat-search-header">                            
+                <div class="header-title d-flex align-items-center justify-content-between">
+                    <h4 class="mb-3">Settings</h4>
+                </div>
+        
+                <!-- Settings Search -->
+                <div class="search-wrap">
+                    <form action="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search Settings">
+                            <span class="input-group-text"><i class="ti ti-search"></i></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /Settings Search --> 
+            </div>   
+
+            <div class="sidebar-body chat-body">
+            
+                <!-- Account setting -->
+                <form action="#" class="row g-3" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Account</h5>
+                    <div class="chat-file">
+                        <div class="file-item">
+                            <div class="accordion accordion-flush chat-accordion" id="account-setting">
+                                <div class="accordion-item others">
+                                    <h2 class="accordion-header">
+                                        <a href="#" name="bio" class="accordion-button" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse" aria-expanded="true" aria-controls="chatuser-collapse">
+                                            <i class="ti ti-user me-2"></i>{{user_profile.bio}}
+                                        </a>
+                                    </h2>
+                                    <div id="chatuser-collapse" class="accordion-collapse collapse show" data-bs-parent="#account-setting">
+                                        <div class="accordion-body">
+                                            <div>
+                                                <div class="d-flex justify-content-center align-items-center">
+                                                    <span class="set-pro avatar avatar-xxl rounded-circle mb-3 p-1">
+                                                        <img src="{% static 'assets/img/profiles/avatar-16.jpg' %}" class="rounded-circle" alt="user">
+                                                        <span class="add avatar avatar-sm d-flex justify-content-center align-items-center"><i class="ti ti-plus rounded-circle d-flex justify-content-center align-items-center"></i></span>
+                                                    </span>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="First Name">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-user"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Last Name">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-user"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Gender">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-user-star"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control datetimepicker" placeholder="Date of birth">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-calendar-event"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Country">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-map-2"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="form-item d-flex justify-content-between mb-3">
+                                                            <textarea class="form-control" placeholder="About" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 d-flex">
+                                                        <a href="javascript:void(0);" class="btn btn-primary flex-fill"><i class="ti ti-device-floppy me-2"></i>Save Changes</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion-item others mb-3">
+                                    <h2 class="accordion-header">
+                                        <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#social-id" aria-expanded="false" aria-controls="social-id">
+                                            <i class="ti ti-social me-2"></i>Social Profiles
+                                        </a>
+                                    </h2>
+                                    <div id="social-id" class="accordion-collapse collapse" data-bs-parent="#account-setting">
+                                        <div class="accordion-body">
+                                            <div class="chat-video">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Facebook">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-brand-facebook"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Google">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-brand-google"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Twitter">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-brand-twitter"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="Linkedin">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-brand-linkedin"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3 position-relative">
+                                                            <input type="text" value="" class="form-control" placeholder="youtube">
+                                                            <span class="icon-addon">
+                                                                <i class="ti ti-brand-youtube"></i>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 d-flex">
+                                                        <a href="javascript:void(0);" class="btn btn-primary flex-fill"><i class="ti ti-device-floppy me-2"></i>Save Changes</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-lock-square text-gray me-2"></i>Screen Lock</a></h6>
+                                    <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                        <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <!-- /Account setting -->
+
+                <!-- Security setting -->
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Security</h5>
+                    <div class="chat-file">
+                        <div class="file-item">
+                            <div class="accordion accordion-flush chat-accordion" id="pwd-setting">
+                                <div class="accordion-item others mb-3">
+                                    <h2 class="accordion-header">
+                                        <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#set-pwd" aria-expanded="false" aria-controls="set-pwd">
+                                            <i class="ti ti-key me-2"></i>Password
+                                        </a>
+                                    </h2>
+                                    <div id="set-pwd" class="accordion-collapse collapse" data-bs-parent="#pwd-setting">
+                                        <div class="accordion-body">
+                                            <div class="">
+                                                <div class="row">
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3">
+                                                            <input type="password" class="pass-input form-control" placeholder="Old Password">
+                                                            <span class="ti toggle-password ti-eye-off"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3">
+                                                            <input type="password" class="pass-inputs form-control" placeholder="New Password">
+                                                            <span class="ti toggle-passwords ti-eye-off"></span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12">
+                                                        <div class="input-icon mb-3">
+                                                            <input type="password" class="conform-pass-input form-control" placeholder="Confirmed Password">
+                                                            <span class="ti conform-toggle-password ti-eye-off"></span>
+                                                        </div>
+                                                    </div>
+                                                        <div class="col-lg-12 d-flex">
+                                                            <a href="javascript:void(0);" class="btn btn-primary flex-fill"><i class="ti ti-device-floppy me-2"></i>Save Changes</a>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-shield text-gray me-2"></i>Two Factor Authentication</a></h6>
+                                    <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                        <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Security setting -->
+
+                <!-- Privacy setting -->
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Privacy</h5>
+                    <div class="chat-file">
+                        <div class="file-item ">
+                            <div class="accordion accordion-flush chat-accordion" id="privacy-setting">
+                                <div class="mb-3">
+                                    <div class="accordion-item border-0 border-bottom">
+                                        <h2 class="accordion-header others">
+                                            <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse3" aria-expanded="true" aria-controls="chatuser-collapse3">
+                                                <i class="ti ti-mood-smile me-2"></i>Profile Info
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse3" class="accordion-collapse collapse " data-bs-parent="#privacy-setting">
+                                            <div class="accordion-body">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <select class="form-select">
+                                                                <option>Everyone</option>
+                                                                <option>Except</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item border-0 border-bottom">
+                                        <h2 class="accordion-header others">
+                                            <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse3-1" aria-expanded="true" aria-controls="chatuser-collapse3-1">
+                                                <i class="ti ti-eye me-2"></i>Last Seen
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse3-1" class="accordion-collapse collapse " data-bs-parent="#privacy-setting">
+                                            <div class="accordion-body">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <select class="form-select">
+                                                                <option>Everyone</option>
+                                                                <option>Except</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item border-0 border-bottom">
+                                        <h2 class="accordion-header others">
+                                            <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse3-2" aria-expanded="true" aria-controls="chatuser-collapse3-2">
+                                                <i class="ti ti-users-group me-2"></i>Groups
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse3-2" class="accordion-collapse collapse " data-bs-parent="#privacy-setting">
+                                            <div class="accordion-body">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <select class="form-select">
+                                                                <option>Everyone</option>
+                                                                <option>Except</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="accordion-item border-0 border-bottom">
+                                        <h2 class="accordion-header others">
+                                            <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse3-3" aria-expanded="true" aria-controls="chatuser-collapse3-3">
+                                                <i class="ti ti-circle-dot me-2"></i>Status
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse3-3" class="accordion-collapse collapse " data-bs-parent="#privacy-setting">
+                                            <div class="accordion-body">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <select class="form-select mb-3">
+                                                                <option>Everyone</option>
+                                                                <option>Except</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-lg-12 d-flex">
+                                                            <a href="javascript:void(0);" class="btn btn-primary flex-fill"><i class="ti ti-device-floppy me-2"></i>Save Changes</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>  
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-checks text-gray me-2"></i>Read Receipients</a></h6>
+                                    <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                        <input class="form-check-input" type="checkbox" role="switch">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Privacy setting -->
+
+                <!-- Chat setting -->
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Chat</h5>
+                    <div class="chat-file">
+                        <div class="file-item ">
+                            <div class="accordion accordion-flush chat-accordion" id="chat-setting">
+                                <div class="border-0 profile-list mb-3">
+                                    <div class="accordion-item border-0 border-bottom">
+                                        <h2 class="accordion-header border-0">
+                                            <a href="#" class="accordion-button border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse4" aria-expanded="true" aria-controls="chatuser-collapse4">
+                                                <i class="ti ti-photo me-2"></i>Background Images
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse4" class="accordion-collapse border-0 collapse " data-bs-parent="#chat-setting">
+                                            <div class="accordion-body border-0 pb-0">
+                                                <div class="chat-user-photo">
+                                                    <div class="chat-img contact-gallery mb-3">
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-01.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/imggallery/gallery-01.html" title="Demo 01"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-02.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-02.jpg" title="Demo 02"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-03.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-03.jpg" title="Demo 03"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-04.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-04.jpg" title="Demo 04"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-05.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-05.jpg" title="Demo 04"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-06.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-06.jpg" title="Demo 04"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-07.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-07.jpg" title="Demo 04"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="img-wrap">
+                                                            <img src="assets/img/gallery/gallery-08.jpg" alt="img">
+                                                            <div class="img-overlay-1">
+                                                                <a class="gallery-img" href="assets/img/gallery/gallery-08.jpg" title="Demo 04"></a>
+                                                                <span class="check-icon avatar avatar-md d-flex justify-content-center align-items-center">
+                                                                    <i class="ti ti-check  d-flex justify-content-center align-items-center"></i>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 d-flex">
+                                                        <a href="javascript:void(0);" class="btn btn-primary flex-fill mb-3"><i class="ti ti-device-floppy me-2"></i>Save Changes</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="d-flex justify-content-between profile-list align-items-center border-bottom pb-3 mb-3">
+                                    <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-clear-all text-gray me-2 "></i>Clear All Chat</a></h6>
+                                    <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                        <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center profile-list border-bottom pb-3 mb-3">
+                                    <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-trash text-gray me-2 "></i>Delete All Chat</a></h6>
+                                    <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                        <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-restore text-gray me-2 "></i>Chat Backup</a></h6>
+                                    <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                        <input class="form-check-input" type="checkbox" role="switch">
+                                </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <!-- /Chat setting -->
+
+                <!-- Notification setting -->
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Notifications</h5>
+                    <div class="chat-file">
+                        <div class="file-item ">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-center profile-list border-bottom pb-3 mb-3">
+                                        <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-message text-gray me-2 "></i>Message Notifications</a></h6>
+                                        <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                            <input class="form-check-input" type="checkbox" role="switch">
+                                    </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center profile-list border-bottom pb-3 mb-3">
+                                        <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-trash text-gray me-2 "></i>Show Previews</a></h6>
+                                        <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                            <input class="form-check-input" type="checkbox" role="switch">
+                                    </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center profile-list border-bottom pb-3 mb-3">
+                                        <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-mood-smile text-gray me-2 "></i>Show Reaction Notifications</a></h6>
+                                        <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                            <input class="form-check-input" type="checkbox" role="switch">
+                                    </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-center ">
+                                        <h6 class="fs-14"><a href="javascript:void(0);"><i class="ti ti-bell-ringing text-gray me-2 "></i>Notification Sound</a></h6>
+                                        <div class="form-check form-switch d-flex justify-content-end align-items-center">
+                                            <input class="form-check-input" type="checkbox" role="switch">
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Notification setting -->
+
+                <!-- Language setting -->
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Language</h5>
+                    <div class="chat-file">
+                        <div class="file-item ">
+                            <div class="accordion accordion-flush chat-accordion" id="language-setting">
+                                <div>
+                                    <div class="accordion-item border-0">
+                                        <h2 class="accordion-header">
+                                            <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse5" aria-expanded="false" aria-controls="chatuser-collapse5">
+                                                <i class="ti ti-language me-2"></i>Language
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse5" class="accordion-collapse collapse " data-bs-parent="#Language-setting">
+                                            <div class="accordion-body">
+                                                <div>
+                                                    <div class="row">
+                                                        <div class="col-lg-12">
+                                                            <select class="form-select">
+                                                                <option>English</option>
+                                                                <option>French</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Language setting -->
+
+                <!-- Manage Device -->
+                <div class="content-wrapper">
+                    <h5 class="sub-title">Manage Device</h5>
+                    <div class="chat-file">
+                        <div class="file-item ">
+                            <div class="accordion accordion-flush chat-accordion" id="device-setting">
+                                <div>
+                                    <div class="accordion-item border-0">
+                                        <h2 class="accordion-header">
+                                            <a href="#" class="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#chatuser-collapse6" aria-expanded="false" aria-controls="chatuser-collapse6">
+                                                <i class="ti ti-eye me-2"></i>Device History
+                                            </a>
+                                        </h2>
+                                        <div id="chatuser-collapse6" class="accordion-collapse collapse " data-bs-parent="#device-setting">
+                                            <div class="accordion-body">
+                                                <div class="device-option">
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="device-icon d-flex justify-content-center align-items-center bg-transparent-dark rounded-circle me-2">
+                                                                <i class="ti ti-device-laptop"></i>
+                                                            </span>
+                                                            <div>
+                                                                <h6 class="fs-16">Mac OS Safari 15.1</h6>
+                                                                <span class="fs-16">13 Jul 2024 at 03:15 PM</span>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="d-flex justify-content-end align-items-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="mute" checked>
+                                                            </div>
+                                                            <a href="#"><i class="ti ti-trash fs-16" ></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="device-icon d-flex justify-content-center align-items-center bg-transparent-dark rounded-circle me-2">
+                                                                <i class="ti ti-device-laptop"></i>
+                                                            </span>
+                                                            <div>
+                                                                <h6 class="fs-16">Windows 11 Mozilla Firefox</h6>
+                                                                <span class="fs-16">06 Jul 2024 at 09:30 AM</span>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="d-flex justify-content-end align-items-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="mute" >
+                                                            </div>
+                                                            <a href="#"><i class="ti ti-trash fs-16" ></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="device-icon d-flex justify-content-center align-items-center bg-transparent-dark rounded-circle me-2">
+                                                                <i class="ti ti-device-mobile"></i>
+                                                            </span>
+                                                            <div>
+                                                                <h6 class="fs-16">IOS Safari 15.1</h6>
+                                                                <span class="fs-16">28 Jun 2024 at 04:00 PM</span>
+                                                            </div> 
+                                                        </div>
+                                                        <div class="d-flex justify-content-end align-items-center">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="mute" >
+                                                            </div>
+                                                            <a href="#"><i class="ti ti-trash fs-16" ></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex">
+                                                        <a href="javascript:void(0);" class="btn btn-primary flex-fill"><i class="ti ti-logout-2 me-2"></i>Logout From All Devices</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /Manage Device -->
+
+                <!-- Others -->
+                <div class="content-wrapper mb-0">
+                    <h5 class="sub-title">Others</h5>
+                    <div class="card mb-0">
+                        <div class="card-body list-group profile-item">
+                                <div class="accordion accordion-flush chat-accordion list-group-item" id="other-term">
+                                    <div class="accordion-item w-100">
+                                        <h2 class="accordion-header">
+                                            <a href="#" class="accordion-button py-0 collapsed" data-bs-toggle="collapse" data-bs-target="#terms" aria-expanded="false" aria-controls="terms">
+                                                <i class="ti ti-file-text me-2"></i>Terms & Conditions
+                                            </a>
+                                        </h2>
+                                        <div id="terms" class="accordion-collapse collapse" data-bs-parent="#other-term">
+                                            <div class="accordion-body p-0 pt-3">
+                                                <textarea class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="accordion accordion-flush chat-accordion list-group-item" id="other-policy">
+                                    <div class="accordion-item w-100">
+                                        <h2 class="accordion-header">
+                                            <a href="#" class="accordion-button py-0 collapsed" data-bs-toggle="collapse" data-bs-target="#privacy" aria-expanded="false" aria-controls="privacy">
+                                                <i class="ti ti-file-text me-2"></i>Privacy Policy
+                                            </a>
+                                        </h2>
+                                        <div id="privacy" class="accordion-collapse collapse" data-bs-parent="#other-policy">
+                                            <div class="accordion-body p-0 pt-3">
+                                                <textarea class="form-control"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="javascript:void(0);" class="list-group-item" data-bs-toggle="modal" data-bs-target="#block-user">
+                                    <div class="profile-info">
+                                        <h6><i class="ti ti-ban text-gray me-2"></i>Blocked User</h6>
+                                    </div>
+                                    <div>
+                                        <span class="link-icon"><i class="ti ti-chevron-right"></i></span>
+                                    </div>
+                                </a>
+                                <a href="javascript:void(0);" class="list-group-item" data-bs-toggle="modal" data-bs-target="#mute-user">
+                                    <div class="profile-info">
+                                        <h6><i class="ti ti-volume-off text-gray me-2"></i>Mute User</h6>
+                                    </div>
+                                    <div>
+                                        <span class="link-icon"><i class="ti ti-chevron-right"></i></span>
+                                    </div>
+                                </a>
+                                <a href="javascript:void(0);" class="list-group-item" data-bs-toggle="modal" data-bs-target="#delete-account">
+                                    <div class="profile-info">
+                                        <h6 ><i class="ti ti-trash-x text-gray me-2"></i>Delete Account</h6>
+                                    </div>
+                                    <div>
+                                        <span class="link-icon"><i class="ti ti-chevron-right"></i></span>
+                                    </div>
+                                </a>
+                                <a href="javascript:void(0);" class="list-group-item"  data-bs-toggle="modal" data-bs-target="#acc-logout">
+                                    <div class="profile-info">
+                                        <h6 ><i class="ti ti-logout text-gray me-2"></i>Logout</h6>
+                                    </div>
+                                    <div>
+                                        <span class="link-icon"><i class="ti ti-chevron-right"></i></span>
+                                    </div>
+                                </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Others -->
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / Chats sidebar -->
+</div>

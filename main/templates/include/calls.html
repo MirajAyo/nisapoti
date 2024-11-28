@@ -1,0 +1,550 @@
+{% load static %}
+<div class="tab-pane fade" id="call-menu">
+    <div class="sidebar-content active slimscroll">
+
+        <div class="slimscroll">
+
+            <div class="chat-search-header">                            
+                <div class="header-title d-flex align-items-center justify-content-between">
+                    <h4 class="mb-3">Calls</h4>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="#" class="call-icon d-flex justify-content-center align-items-center text-white bg-primary rounded-circle me-2" data-bs-toggle="modal" data-bs-target="#new-call">
+                            <i class="ti ti-phone-plus fs-16"></i>
+                        </a>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" data-bs-toggle="dropdown" class="fs-16 text-default">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu p-3">
+                                <li>
+                                    <a href="#" class="dropdown-item d-flex align-items-center" >
+                                        <span><i class="ti ti-phone-x me-2"></i></span>
+                                        Clear Call Log
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+           
+                <!-- Chat Search -->
+                <div class="search-wrap">
+                    <form action="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search">
+                            <span class="input-group-text"><i class="ti ti-search"></i></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /Chat Search --> 
+            </div>       
+
+            <div class="sidebar-body chat-body" id="chatsidebar1">
+               
+                <!-- Left Chat Title -->
+                <div class="d-flex  align-items-center mb-3">
+                <h5 class="chat-title2 me-2">All Calls</h5>
+                <div class="dropdown">
+                    <a href="#" class="text-default fs-16" data-bs-toggle="dropdown" aria-expanded="false"><i class="ti ti-chevron-down"></i></a>
+                    <ul class=" dropdown-menu dropdown-menu-end p-3" id="innerTab1" role="tablist">
+                        <li role="presentation">
+                            <a class="dropdown-item active" id="all-calls-tab" data-bs-toggle="tab" href="#all-calls" role="tab" aria-controls="all-calls" aria-selected="true" onclick="if (!window.__cfRLUnblockHandlers) return false; changeChat2('All Calls')" data-cf-modified-5f1efdf0710682e042c80a6a-="">All Calls</a>
+                        </li>
+                        <li role="presentation">
+                            <a class="dropdown-item" id="audio-calls-tab" data-bs-toggle="tab" href="#audio-calls" role="tab" aria-controls="audio-calls" aria-selected="false" onclick="if (!window.__cfRLUnblockHandlers) return false; changeChat2('Audio Calls')" data-cf-modified-5f1efdf0710682e042c80a6a-="">Audio Calls</a>
+                        </li>
+                        <li role="presentation">
+                            <a class="dropdown-item" id="video-calls-tab" data-bs-toggle="tab" href="#video-calls" role="tab" aria-controls="video-calls" aria-selected="false" onclick="if (!window.__cfRLUnblockHandlers) return false; changeChat2('Video Calls')" data-cf-modified-5f1efdf0710682e042c80a6a-="">Video Calls</a>
+                        </li>
+                    </ul>
+                </div>
+                </div>
+                <!-- /Left Chat Title -->
+                <div class="tab-content" id="callTabContent">
+                <div class="tab-pane fade show active" id="all-calls" role="tabpanel" aria-labelledby="all-calls-tab">
+                    <div class="chat-users-wrap">
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-06.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Edward Lietz</h6>
+                                        <p><i class="ti ti-phone-outgoing text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div> 
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-01.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6 class="">Mark Villiams</h6>
+                                        <p class="fs-14">
+                                            <i class="ti ti-phone-incoming me-2 fs-14 text-success"></i>
+                                            20 Min Ago
+                                        </p>
+                                    </div>
+                                    <div class="chat-user ">
+                                        <span class="mb-2">08m 12s</span>
+                                        <div class="d-flex justify-content-end">
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                            
+                        </div>   
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-05.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Federico Wells</h6>
+                                        <p><i class="ti ti-video-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                       
+                        </div>  
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-03.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Clyde Smith</h6>
+                                        <p><i class="ti ti-phone-outgoing text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div>  
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-04.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Carla Jenkins</h6>
+                                        <p><i class="ti ti-video text-success me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </a>                         
+                        </div> 
+                        <div class="chat-list"> 
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-02.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Sarika Jain</h6>
+                                        <p><i class="ti ti-phone-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                         
+                        </div>    
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg bg-purple offline avatar-rounded me-2">
+                                    <span class="avatar-title fs-14 fw-medium">AG</span>
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Amfr_boys_Group</h6>
+                                        <p><i class="ti ti-video-minus text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div> 
+                        <div class="chat-list"> 
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-10.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Wilbur Martinez</h6>
+                                        <p><i class="ti ti-phone-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                         
+                        </div>   
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="audio-calls" role="tabpanel" aria-labelledby="audio-calls-tab">
+                    <div class="chat-users-wrap">
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-06.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Edward Lietz</h6>
+                                        <p><i class="ti ti-phone-outgoing text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div> 
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-01.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6 class="">Mark Villiams</h6>
+                                        <p class="fs-14">
+                                            <i class="ti ti-phone-incoming me-2 fs-14 text-success"></i>
+                                            20 Min Ago
+                                        </p>
+                                    </div>
+                                    <div class="chat-user ">
+                                        <span class="mb-2">08m 12s</span>
+                                        <div class="d-flex justify-content-end">
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                            
+                        </div>   
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-05.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Federico Wells</h6>
+                                        <p class="fs-14">
+                                            <i class="ti ti-phone-incoming me-2 fs-14 text-success"></i>
+                                            20 Min Ago
+                                        </p>
+                                    </div>
+                                    <div class="chat-user ">
+                                        <span class="mb-2">08m 12s</span>
+                                        <div class="d-flex justify-content-end">
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>      
+                                </div>
+                            </a>                       
+                        </div>  
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-03.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Clyde Smith</h6>
+                                        <p><i class="ti ti-phone-outgoing text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div>  
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-04.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Carla Jenkins</h6>
+                                        <p><i class="ti ti-phone-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </a>                         
+                        </div> 
+                        <div class="chat-list"> 
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-02.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Sarika Jain</h6>
+                                        <p><i class="ti ti-phone-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                         
+                        </div>    
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg bg-purple avatar-rounded me-2">
+                                    <span class="avatar-title fs-14 fw-medium">AG</span>
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Amfr_boys_Group</h6>
+                                        <p class="fs-14">
+                                            <i class="ti ti-phone-incoming me-2 fs-14 text-success"></i>
+                                            20 Min Ago
+                                        </p>
+                                    </div>
+                                    <div class="chat-user ">
+                                        <span class="mb-2">08m 12s</span>
+                                        <div class="d-flex justify-content-end">
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>     
+                                </div>
+                            </a>                        
+                        </div> 
+                        <div class="chat-list"> 
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-10.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Wilbur Martinez</h6>
+                                        <p><i class="ti ti-phone-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-phone-call text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                         
+                        </div>   
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="video-calls" role="tabpanel" aria-labelledby="video-calls-tab">
+                    <div class="chat-users-wrap">
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-06.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Edward Lietz</h6>
+                                        <p><i class="ti ti-video text-success me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div> 
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-01.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6 class="">Mark Villiams</h6>
+                                        <p><i class="ti ti-video-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>      
+                                </div>
+                            </a>                            
+                        </div>   
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-05.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Federico Wells</h6>
+                                        <p><i class="ti ti-video-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                       
+                        </div>  
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-03.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Clyde Smith</h6>
+                                        <p><i class="ti ti-video-minus text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                        
+                        </div>  
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-04.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Carla Jenkins</h6>
+                                        <p><i class="ti ti-video text-success me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </a>                         
+                        </div> 
+                        <div class="chat-list"> 
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="{% static 'assets/img/profiles/avatar-02.jpg' %}" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Sarika Jain</h6>
+                                        <p><i class="ti ti-video-minus text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                         
+                        </div>    
+                        <div class="chat-list">
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg bg-purple avatar-rounded me-2">
+                                    <span class="avatar-title fs-14 fw-medium">AG</span>
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Amfr_boys_Group</h6>
+                                        <p><i class="ti ti-video-off text-danger me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>   
+                                </div>
+                            </a>                        
+                        </div> 
+                        <div class="chat-list"> 
+                            <a href="all-calls.html" class="chat-user-list">
+                                <div class="avatar avatar-lg online me-2">
+                                    <img src="assets/img/profiles/avatar-10.jpg" class="rounded-circle" alt="image">
+                                </div>
+                                <div class="chat-user-info">
+                                    <div class="chat-user-msg">
+                                        <h6>Wilbur Martinez</h6>
+                                        <p><i class="ti ti-video-minus text-purple me-2"></i>20 Min Ago</p>
+                                    </div>
+                                    <div class="chat-user-time">
+                                        <span class="time">08m 12s</span>
+                                        <div>
+                                            <i class="ti ti-video text-pink"></i>
+                                        </div>
+                                    </div>    
+                                </div>
+                            </a>                         
+                        </div>   
+                    </div>
+                </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

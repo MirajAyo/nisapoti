@@ -1,0 +1,502 @@
+{% load static %}
+<div class="tab-pane fade" id="group-menu">
+
+    <!-- Chats sidebar -->
+    <div class="sidebar-content active slimscroll">
+
+        <div class="slimscroll">
+
+            <div class="chat-search-header">                            
+                <div class="header-title d-flex align-items-center justify-content-between">
+                    <h4 class="mb-3">Group</h4>
+                    <div class="d-flex align-items-center mb-3">
+                        <a href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#new-group" class="add-icon btn btn-primary p-0 d-flex align-items-center justify-content-center fs-16 me-2"><i class="ti ti-plus"></i></a>
+                        <div class="dropdown">
+                            <a href="javascript:void(0);" data-bs-toggle="dropdown" class="fs-16 text-default">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu p-3">
+                                <li><a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#invite"><i class="ti ti-send me-2"></i>Invite Others</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+           
+                <!-- Chat Search -->
+                <div class="search-wrap">
+                    <form action="#">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search For Contacts or Messages">
+                            <span class="input-group-text"><i class="ti ti-search"></i></span>
+                        </div>
+                    </form>
+                </div>
+                <!-- /Chat Search --> 
+            </div>       
+
+            <div class="sidebar-body chat-body">
+               
+                <!-- Left Chat Title -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5>All Groups</h5>
+                </div>
+                <!-- /Left Chat Title -->
+
+                <div class="chat-users-wrap">
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-01.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>The Dream Team</h6>
+                                    <p><span class="animate-typing">is typing
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        <span class="dot"></span>
+                                        </span>
+                                    </p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-pin me-2"></i>
+                                        <span class="count-message fs-12 fw-semibold">12</span>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                        
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                             <ul class="dropdown-menu dropdown-menu-end p-3">
+                                <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                            </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list"> 
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-02.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>The Meme Team</h6>
+                                    <p>Do you know which...</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">06:12 AM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-pin me-2"></i>
+                                        <i class="ti ti-checks text-success"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-03.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Tech Talk Tribe</h6>
+                                    <p>Haha oh man</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">03:15 AM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-pin me-2"></i>
+                                        <span class="count-message fs-12 fw-semibold">55</span>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg bg-pink avatar-rounded me-2">
+                                <span class="avatar-title fs-14 fw-medium">AG</span>
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Amfr_boys_Group</h6>
+                                    <p><i class="ti ti-photo me-2"></i>Photo</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">Yesterday</span>
+                                    <div class="chat-pin">
+                                        <span class="count-message fs-12 fw-semibold">5</span>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-04.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>The Academic Alliance</h6>
+                                    <p class="text-success"><i class="ti ti-video-plus me-2"></i>Incoming Video Call</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">Sunday</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-checks text-success"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-05.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>The Chill Zone</h6>
+                                    <p><i class="ti ti-photo me-2"></i>Photo</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">Wednesday</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-pin me-2"></i>
+                                        <span class="count-message fs-12 fw-semibold">12</span>
+                                        <i class="bx bx-check-double"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-06.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Squad Goals</h6>
+                                    <p><i class="ti ti-file me-2"></i>Document</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-checks text-success"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>  
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg bg-skyblue online avatar-rounded me-2">
+                                <span class="avatar-title fs-14 fw-medium">GU</span>
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Gustov_family</h6>
+                                    <p>Please Check<span class="text-primary ms-1">@rev</span></p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">24 Jul 2024</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-heart-filled text-warning me-2"></i>
+                                        <span class="count-message fs-12 fw-semibold">25</span>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>    
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-07.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Scholars Society</h6>
+                                    <p class="text-danger"><i class="ti ti-video-off me-2"></i>Missed Video Call</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-heart-filled text-warning me-2"></i>
+                                        <i class="ti ti-checks text-success"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>   
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-08.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Travel Tribe</h6>
+                                    <p>Hi How are you</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <span class="count-message fs-12 fw-semibold">25</span>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>   
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-09.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Fitness Fanatics</h6>
+                                    <p>Do you know which...</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-heart-filled text-warning"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>   
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-10.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>The Quest Crew</h6>
+                                    <p>Haha oh man</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-pin me-2"></i>
+                                        <i class="ti ti-checks text-success"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>   
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-11.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Game Changers</h6>
+                                    <p><i class="ti ti-map-pin-plus me-2"></i>Location</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-checks text-success"></i>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>   
+                    <div class="chat-list">
+                        <a href="group-chat.html" class="chat-user-list">
+                            <div class="avatar avatar-lg online me-2">
+                                <img src="assets/img/groups/group-12.jpg" class="rounded-circle" alt="image">
+                            </div>
+                            <div class="chat-user-info">
+                                <div class="chat-user-msg">
+                                    <h6>Movie Buffs</h6>
+                                    <p><i class="ti ti-video me-2"></i>Video</p>
+                                </div>
+                                <div class="chat-user-time">
+                                    <span class="time">02:40 PM</span>
+                                    <div class="chat-pin">
+                                        <i class="ti ti-heart-filled text-warning me-2"></i>
+                                        <span class="count-message fs-12 fw-semibold">25</span>
+                                    </div>
+                                </div>    
+                            </div>
+                        </a>                    
+                        <div class="chat-dropdown">
+                            <a class="#" href="#" data-bs-toggle="dropdown">
+                                <i class="ti ti-dots-vertical"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end p-3">
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-box-align-right me-2"></i>Archive Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-volume-off me-2"></i>Mute Notification</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-logout-2 me-2"></i>Exit Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-pinned me-2"></i>Pin Group</a></li>
+                               <li><a class="dropdown-item" href="#"><i class="ti ti-square-check me-2"></i>Mark as Unread</a></li>
+                           </ul>
+                        </div>     
+                    </div>      
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- / Chats sidebar -->
+
+</div>

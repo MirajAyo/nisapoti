@@ -1,0 +1,62 @@
+from django.urls import path, include
+from.views import views_auth, views_profile, views_post, views_chat
+# from ..import views_auth
+from django.urls import path
+
+urlpatterns=[
+    path('', views.index, name='index'),
+    path('videos', views.videos, name='videos'),
+    path('favorites', views.favorites, name='favorites'),
+    path('recharge', views.recharge, name='recharge'),
+
+    path('profile/<str:pk>', views.profile, name='profile'),
+    path('accounts/profile/', views.profile_view, name='profile'),
+    
+
+    path('shop', views.shop, name='shop'),
+    path('shop_details', views.shop_details, name='shop_details'),
+    path('settings', views.settings, name='settings'),
+
+    path('sugest', views.sugest, name='sugest'),
+
+    # follow
+    path('follow', views.follow, name='follow'),
+
+    path('search', views.search, name='search'),
+
+    # chats
+    path('chats/', views.chat_view, name='chat'),
+    path('chats/<str:recipient_username>/', views.chat_view, name='private_chat'),
+    
+
+    # post
+    path('upload', views.upload, name='upload'),
+    # path('like-post', views.like_post, name='like-post'),
+    path('like_post/', views.like_post, name='like_post'),
+
+
+
+    path('post/<uuid:post_id>/', views.post_detail, name='post_detail'),
+    path('post/<uuid:post_id>/comment/', views.comment_view, name='comment_view'),
+    path('post/<uuid:post_id>/comment/<int:comment_id>/reply/', views.reply_comment_view, name='reply_comment_view'),
+
+    # authentications
+    # path('signup', views.signup, name='signup'),
+    # path('signin', views.signin, name='signin'),
+    # path('logout/', views.logout_view, name='logout'),  # Logout path
+    
+    
+    path('signin/', views.signin, name='signin'),  # Your custom login view
+    path('signup/', views.signup, name='signup'),
+    path('logout/', views.logout_view, name='logout'),
+    
+    
+    path('transfer/', views.transfer_money, name='transfer_money'),
+    path('', views.wallet_balance, name='wallet_balance'),  # Ensure you have this if it's the home view
+    
+    
+]
+
+
+
+

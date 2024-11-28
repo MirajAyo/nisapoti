@@ -1,0 +1,238 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+  <!-- Main content START -->
+  <div class="col-lg-8 vstack gap-4">
+    <!-- My profile START -->
+
+    <!-- Card feed item START -->
+    <div class="card">
+      <!-- Card header START -->
+      <div class="card-header border-0 pb-0">
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <!-- Avatar -->
+            <div class="avatar avatar-story me-2">
+              <a href="#!"><img class="avatar-img rounded-circle" src="{{ user_profile.profileimg.url }}" alt="" /></a>
+            </div>
+            <!-- Info -->
+            <div>
+              <div class="nav nav-divider">
+                <h6 class="nav-item card-title mb-0"><a href="/profile/{{ post.user }}">@{{ post.user }}</a></h6>
+                <span class="nav-item small">2hr</span>
+              </div>
+              <p class="mb-0 small">Web Developer at Webestica</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card header END -->
+      <!-- Card body START -->
+      <div class="card-body">
+        <p>{{ post.caption }}</p>
+
+        <!-- Card img -->
+        <video controls style="max-width: 100%; height: auto" autoplay loop muted>
+          <source src="{{ post.video.url }}" type="video/mp4" />Your browser does not support the video tag.
+        </video>
+        <!-- Feed react START -->
+        <ul class="nav nav-stack py-3 small">
+          <img id="like-btn" data-post-id="{{ post.id }}" class="me-2 fa-fw" src="{% static 'assets/images/icon/like-outline-filled.svg' %}" />
+          <li class="nav-item">
+            <a class="nav-link">
+              {% comment %} <i class="bi bi-hand-thumbs-up-fill pe-1"></i> {% endcomment %}
+              <i id="like-count-{{ post.id }}">
+                {% if post.no_of_likes == 0 %}
+                  no like
+                {% elif post.no_of_likes == 1 %}
+                  1 like
+                {% else %}
+                  {{ post.no_of_likes }} likes
+                {% endif %}
+              </i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!">
+              <i class="bi bi-chat-fill pe-1"></i>
+
+              {% if comment_count == 0 %}
+                No omments
+              {% elif comment_count == 1 %}
+                Comment (1)
+              {% else %}
+                Comments ({{ comment_count }})
+              {% endif %}
+            </a>
+          </li>
+          <li>
+            <a href="" class="nav-link"><i class="fa fa-eye pe-1"></i>{{ post.views }} Views</a>
+          </li>
+
+          <!-- Card share action START -->
+          <li class="nav-item dropdown ms-sm-auto">
+            <a class="nav-link mb-0" href="#" id="cardShareAction8" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-reply-fill flip-horizontal ps-1"></i>Share (3)</a>
+            <!-- Card share action dropdown menu -->
+            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="cardShareAction8">
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-envelope fa-fw pe-2"></i>Send via Direct Message</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-bookmark-check fa-fw pe-2"></i>Bookmark</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-link fa-fw pe-2"></i>Copy link to post</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-share fa-fw pe-2"></i>Share post via …</a>
+              </li>
+              <li>
+                <hr class="dropdown-divider" />
+              </li>
+              <li>
+                <a class="dropdown-item" href="#"><i class="bi bi-pencil-square fa-fw pe-2"></i>Share to News Feed</a>
+              </li>
+            </ul>
+          </li>
+          <!-- Card share action END -->
+        </ul>
+        <!-- Feed react END -->
+
+        <!-- Add comment -->
+        <div class="d-flex mb-3">
+          <!-- Avatar -->
+          <div class="avatar avatar-xs me-2">
+            <a href="#!"><img class="avatar-img rounded-circle" src="{{ user_profile.profileimg.url }}" alt="" /></a>
+          </div>
+          <!-- Comment box -->
+          <form class="nav nav-item w-100 position-relative" method="POST" action="{% url 'post_detail' post.id %}">
+            {% csrf_token %}
+            <input type="hidden" name="post_id" value="{{ post.id }}" />
+            <textarea data-autoresize="" name="comment_text" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+            <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit"><i class="bi bi-send-fill"></i></button>
+          </form>
+        </div>
+        <!-- Comment wrap START -->
+        {% for comment in comments %}
+          <ul class="comment-wrap list-unstyled">
+            <!-- Comment item START -->
+            <li class="comment-item">
+              <div class="d-flex position-relative">
+                <!-- Avatar -->
+                <div class="avatar avatar-xs">
+                  <a href="#!"><img class="avatar-img rounded-circle" src="{{ user_profile.profileimg.url }}" alt="" /></a>
+                </div>
+                <div class="ms-2">
+                  <!-- Comment by -->
+                  <div class="bg-light rounded-start-top-0 p-3 rounded">
+                    <div class="d-flex justify-content-between">
+                      <h6 class="mb-1"><a href="#!">@{{ comment.user.username }}</a></h6>
+                      <small class="ms-2">
+                        {% if comment.created_at|timesince < '1 minute' %}
+                          Just now
+                        {% elif comment.created_at|timesince < '60 minute' %}
+                          {{ comment.created_at|timesince }} ago
+                        {% elif comment.created_at|timesince < '24 hour' %}
+                          {{ comment.created_at|timesince }} ago
+                        {% elif comment.created_at|timesince < '1 week' %}
+                          {{ comment.created_at|date:'D' }}
+                        {% elif comment.created_at|timesince < '1 month' %}
+                          {{ comment.created_at|date:'M d' }}
+                        {% else %}
+                          {{ comment.created_at|date:'M d, Y' }}
+                        {% endif %}
+                      </small>
+                    </div>
+                    <p class="small mb-0">{{ comment.text }}</p>
+                  </div>
+                  <!-- Comment react -->
+                  <ul class="nav nav-divider py-2 small">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#!">Like (3)</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link reply-link" data-comment-id="{{ comment.id }}" href="#!">Reply</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#!">View 5 replies</a>
+                    </li>
+                  </ul>
+                  <div class="d-flex mb-3">
+                    <!-- Comment box -->
+                    <form class="nav nav-item w-100 position-relative reply-form" data-comment-id="{{ comment.id }}" method="POST" action="{% url 'post_detail' post.id %}" style="display: none;">
+                      {% csrf_token %}
+                      <input type="hidden" name="post_id" value="{{ post.id }}" />
+                      <input type="hidden" name="parent_id" value="{{ comment.id }}" />
+                      <textarea data-autoresize="" name="comment_text" class="form-control pe-5 bg-light" rows="1" placeholder="Add a comment..."></textarea>
+                      <button class="nav-link bg-transparent px-3 position-absolute top-50 end-0 translate-middle-y border-0" type="submit"><i class="bi bi-send-fill"></i></button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              {% for reply in comment.replies.all %}
+                <ul class="comment-item-nested list-unstyled">
+                  <!-- Comment item START -->
+                  <li class="comment-item">
+                    <div class="d-flex">
+                      <!-- Avatar -->
+                      <div class="avatar avatar-xs">
+                        <a href="#!"><img class="avatar-img rounded-circle" src="{{ user_profile.profileimg.url }}" alt="" /></a>
+                      </div>
+                      <!-- Comment by -->
+                      <div class="ms-2">
+                        <div class="bg-light p-3 rounded">
+                          <div class="d-flex justify-content-between">
+                            <h6 class="mb-1"><a href="#!">@{{ reply.user.username }}</a></h6>
+                            <small class="ms-2">
+                              {% if reply.created_at|timesince < '1 minute' %}
+                                Just now
+                              {% elif reply.created_at|timesince < '60 minute' %}
+                                {{ reply.created_at|timesince }} ago
+                              {% elif reply.created_at|timesince < '24 hour' %}
+                                {{ reply.created_at|timesince }} ago
+                              {% elif reply.created_at|timesince < '1 week' %}
+                                {{ reply.created_at|date:'D' }}
+                              {% elif reply.created_at|timesince < '1 month' %}
+                                {{ reply.created_at|date:'M d' }}
+                              {% else %}
+                                {{ reply.created_at|date:'M d, Y' }}
+                              {% endif %}
+                            </small>
+                          </div>
+                          <p class="small mb-0">{{ reply.text }}</p>
+                        </div>
+                        <!-- Comment react -->
+                        <ul class="nav nav-divider py-2 small">
+                          <li class="nav-item">
+                            <a class="nav-link" href="#!">Like (5)</a>
+                          </li>
+                          <li class="nav-item">
+                            <a class="nav-link" href="#!">Reply</a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              {% endfor %}
+            </li>
+          </ul>
+        {% endfor %}
+
+        <!-- Comment wrap END -->
+      </div>
+      <!-- Card footer START -->
+      <div class="card-footer border-0 pt-0">
+        <!-- Load more comments -->
+        <a href="#!" role="button" class="btn btn-link btn-link-loader btn-sm text-secondary d-flex align-items-center" data-bs-toggle="button" aria-pressed="true">
+          <div class="spinner-dots me-2">
+            <span class="spinner-dot"></span>
+            <span class="spinner-dot"></span>
+            <span class="spinner-dot"></span>
+          </div>Load more comments
+        </a>
+      </div>
+      <!-- Card footer END -->
+    </div>
+    <!-- Card feed item END -->
+  </div>
+  <!-- Main content END -->
+{% endblock %}

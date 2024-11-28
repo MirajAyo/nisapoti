@@ -1,0 +1,75 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from demo.foxthemes.net/instello/home.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Nov 2024 15:24:38 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link href="assets/images/favicon.png" rel="icon" type="image/png">
+
+    <!-- title and description-->
+    <title>Tuwuizer</title>
+    <meta name="description" content="Instello - Sharing Photos platform HTML Template">
+   
+    <!-- css files -->
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">  
+    
+    <!-- google font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    
+    
+    {% comment %} svd {% endcomment %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/css/ionicons.min.css">
+    {% comment %} <img src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/svg/send.svg" alt="Send Icon"> {% endcomment %}
+
+
+ 
+</head>
+<body>
+
+
+    <div id="wrapper">
+
+        <!-- sidebar -->
+        {% include "include/left.html" %}
+
+        <!-- main contents -->
+        {% block content %}{% endblock content %}
+        
+    </div>
+
+ 
+    <!-- create status -->
+    
+
+    <!-- create post modal -->
+    {% include "include/models/create_post_model.html" %}
+ 
+    
+    <!-- Uikit js you can use cdn  https://getuikit.com/docs/installation  or fine the latest  https://getuikit.com/docs/installation -->
+    <script src="{% static 'assets/js/uikit.min.js' %}"></script>
+    <script src="{% static 'assets/js/script.js' %}"></script>
+
+    <!-- Ion icon -->
+    <script type="module" src="../../unpkg.com/ionicons%405.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="../../unpkg.com/ionicons%405.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!-- Ion icon -->
+    <script type="module" src="../../unpkg.com/ionicons%405.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="../../unpkg.com/ionicons%405.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <script type="module" src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://cdn.jsdelivr.net/npm/ionicons@latest/dist/ionicons/ionicons.js"></script>
+
+ {% block script %}{% endblock script %}
+
+</body>
+
+<!-- Mirrored from demo.foxthemes.net/instello/home.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 25 Nov 2024 15:24:52 GMT -->
+</html>

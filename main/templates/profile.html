@@ -1,0 +1,1130 @@
+{% extends "base.html" %}{% load static %}
+{% block content %}
+
+<!-- main contents -->
+<main class="2xl:ml-[--w-side] xl:ml-[--w-side-md] md:ml-[--w-side-small]">
+
+    <div class="main__inner">
+
+        <!-- profile  -->
+        <div class="py-6 relative">
+
+            <div class="flex md:gap-16 gap-4 max-md:flex-col">
+                <div class="relative md:p-1 rounded-full h-full max-md:w-16 bg-gradient-to-tr from-pink-400 to-pink-600 shadow-md hover:scale-110 duration-500 uk-animation-scale-up">
+                    <div class="relative md:w-40 md:h-40 h-16 w-16 rounded-full overflow-hidden md:border-[6px] border-gray-100 shrink-0 dark:border-slate-900"> 
+                        <img src="{{user_profile.profileimg.url}}"  alt="" class="w-full h-full absolute object-cover">
+                    </div>
+                    <button type="button" class="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-white shadow p-1.5 rounded-full sm:flex hidden"> <ion-icon name="camera" class="text-2xl"></ion-icon></button>
+                </div>
+                <div class="max-w-2x flex-1">
+                    <h3 class="md:text-xl text-base font-semibold text-black dark:text-white">{{user_profile.user.first_name}} {{user_profile.user.last_name}}</h3>
+                      
+                    <p class="sm:text-sm text-blue-600 mt-1 font-normal text-xs">@{{user_profile.user.username}}</p>
+                    
+                    <p class="text-sm mt-2 md:font-normal font-light">{{user_profile.bio}}</p>
+
+                    <p class="mt-2 space-x-2 text-gray-500 text-sm " style="margin-top: 11px; "><a href="#" class="inline-block">Travel</a> . <a href="#" class="inline-block">Business</a> . <a href="#" class="inline-block">Technolgy</a>  </p>
+                    <p class="text-sm mt-2 md:font-normal font-light">${{balance}}</p>
+                    <div class="flex md:items-end justify-between md:mt-8 mt-4 max-md:flex-col gap-4">
+                        <div class="flex sm:gap-10 gap-6 sm:text-sm text-xs max-sm:absolute max-sm:top-10 max-sm:left-36">
+                            <div>
+                                {% if user_post_length == 0 %}
+                                <p>No post</p>
+                                {% elif user_post_length == 1 %}
+                                <p> Post</p>{{user_post_length}}
+                                {% else %}
+                                <p> Posts</p>{{user_post_length}}
+                                {% endif %}
+                            </div>
+                            <div>
+                                {% if user_following == 0 or user_following == 1 %}
+                                <p>Following</p>
+                                <h3 class="sm:text-xl sm:font-bold mt-1 text-black dark:text-white text-base font-normal">{{user_following}}</h3>
+                                {% else %}
+                                <p>Followings</p>
+                                <h3 class="sm:text-xl sm:font-bold mt-1 text-black dark:text-white text-base font-normal">{{user_following}}</h3>
+                                {% endif %}
+                            </div>
+                            <div>
+                                {% if user_followers == 0 or user_followers == 1 %}
+                                <p>Follower</p>
+                                <h3 class="sm:text-xl sm:font-bold mt-1 text-black dark:text-white text-base font-normal">{{user_followers}}</h3>
+                                {% else %}
+                                <p>Followers</p>
+                                <h3 class="sm:text-xl sm:font-bold mt-1 text-black dark:text-white text-base font-normal">{{user_followers}}</h3>
+                                {% endif %}
+                            </div>
+                        </div>
+                            <div class="flex items-center gap-3 text-sm">
+                                {% csrf_token %}
+                                
+                                <!-- Account Settings for the Logged-In User -->
+                                {% if user_object.username == user.username %}
+                                    <a href="{% url 'settings' %}" class="cmn-btn gap-1">
+                                        <button type="" class="button bg-blue-600 border text-white">Settings</button>
+                                    </a>
+                                    <a href="/recharge" class="cmn-btn gap-1">
+                                        <button type="" class="button bg-pink-100 text-pink-600 border border-pink-200"">Recharge</button>
+                                    </a>                                
+                                {% else %}
+                                    <form action="/follow" method="POST">
+                                    <!-- Follow Button when Not the Same User -->
+                                    {% if user_object != request.user %}
+                                        <a href="#" class="cmn-btn gap-1">
+                                            <button type="submit" class="button bg-pink-100 text-pink-600 border border-pink-200">{{ button_text }}</button>
+                                        </a>
+                                    {% endif %}
+                        
+                                    <!-- Action Buttons for Others -->
+                                    {% comment %} <button type="" class="button bg-pink-100 text-pink-600 border border-pink-200">Unfollow</button> {% endcomment %}
+                                    <button type="" class="button bg-pink-600 border text-white">Message</button>
+                        
+                                    <!-- Dropdown Menu for More Actions -->
+                                    <div>
+                                        <button type="button" class="rounded-lg bg-slate-200/60 flex px-2 py-1.5 dark:bg-dark2" aria-haspopup="true" aria-expanded="false">
+                                            <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon>
+                                        </button>
+                                        <div class="w-[240px] uk-dropdown" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click; offset:10">
+                                            <nav>
+                                                <a href="#"> <ion-icon class="text-xl" name="pricetags-outline"></ion-icon> Unfollow </a>  
+                                                <a href="#"> <ion-icon class="text-xl" name="time-outline"></ion-icon> Mute story </a>  
+                                                <a href="#"> <ion-icon class="text-xl" name="flag-outline"></ion-icon> Report </a>  
+                                                <a href="#"> <ion-icon class="text-xl" name="share-outline"></ion-icon> Share profile </a>  
+                                                <hr>
+                                                <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> 
+                                                    <ion-icon class="text-xl" name="stop-circle-outline"></ion-icon> Block 
+                                                </a>  
+                                            </nav>
+                                        </div>
+                                    </div>
+                        </form>
+                                {% endif %}
+                            </div>
+                        
+                            
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+
+        <div class="mt-10">
+
+            <!-- sticky tabs -->
+
+            <div  uk-sticky="cls-active: bg-slate-100/60 z-30 backdrop-blur-lg px-4 dark:bg-slate-800/60; start: 500; animation: uk-animation-slide-top">
+                
+                <nav class="text-sm text-center text-gray-500 capitalize font-semibold dark:text-white">
+                    <ul     class="flex gap-2 justify-center border-t dark:border-slate-700"
+                            uk-switcher="connect: #story_tab ; animation: uk-animation-fade, uk-animation-slide-left-medium">
+                    
+                        <li> <a href="#" class="flex items-center p-4 py-2.5 -mb-px border-t-2 border-transparent aria-expanded:text-black aria-expanded:border-black aria-expanded:dark:text-white aria-expanded:dark:border-white"> <ion-icon class="mr-2 text-2xl" name="camera-outline"></ion-icon> Posts  </a> </li>
+                        <li> <a href="#" class="flex items-center p-4 py-2.5 -mb-px border-t-2 border-transparent aria-expanded:text-black aria-expanded:border-black aria-expanded:dark:text-white aria-expanded:dark:border-white"> <ion-icon class="mr-2 text-2xl" name="play-outline"></ion-icon> Reels </a> </li>
+                        <li> <a href="#" class="flex items-center p-4 py-2.5 -mb-px border-t-2 border-transparent aria-expanded:text-black aria-expanded:border-black aria-expanded:dark:text-white aria-expanded:dark:border-white"> <ion-icon class="mr-2 text-2xl" name="pricetags-outline"></ion-icon> Tagged </a> </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+            <div id="story_tab" class="uk-switcher">
+                
+                
+                <!-- Post list -->
+                <div>
+                
+                    <!-- hightlets slider post -->
+
+                    <div class="mt-8">
+
+                        <!-- post heading -->
+                        <div class="flex items-center justify-between py-3">
+                            <h1 class="text-xl font-bold text-black dark:text-white">Highths</h1>
+
+                            <button type="button" class="lg:hidden">
+                                <svg id="icon__outline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="relative mt-5" tabindex="-1" uk-slider="autoplay: true;finite: true">
+
+                            <div class="overflow-hidden uk-slider-container py-10">
+                            
+                            <ul class="-ml-2 uk-slider-items w-[calc(100%+0.875rem)]" uk-scrollspy="target: > li; cls: uk-animation-slide-right-small; delay: 50" uk-lightbox="">
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5 max-lg:hidden" uk-scrollspy-class="uk-animation-fade">
+                                    <div class="flex flex-col items-center justify-center rounded-lg h-64 border-2 border-dashed border-teal-600">
+                                        <ion-icon name="add-circle" class="text-4xl text-teal-900"></ion-icon>
+                                        <div class="mt-1 font-semibold">Add New</div>
+                                    </div>
+                                </li>  
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5">
+                                    <a href="{% static 'assets/images/avatars/avatar-lg-1.jpg' %}"  data-caption="Caption">
+                                        <div class=" lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                                            <div class="w-full lg:h-64 aspect-[2.5/4] realtive">
+                                                <img src="{% static 'assets/images/avatars/avatar-lg-1.jpg' %}" class="rounded-lg w-full h-full object-cover inset-0" alt="">
+                                            </div>  
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5">
+                                    <a href="assets/images/avatars/avatar-lg-2.jpg"  data-caption="Caption">
+                                        <div class=" lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                                            <div class="w-full lg:h-64 aspect-[2.5/4] realtive">
+                                                <img src="assets/images/avatars/avatar-lg-2.jpg" class="rounded-lg w-full h-full object-cover inset-0" alt="">
+                                            </div>  
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5">
+                                    <a href="assets/images/avatars/avatar-lg-3.jpg"  data-caption="Caption">
+                                        <div class=" lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                                            <div class="w-full lg:h-64 aspect-[2.5/4] realtive">
+                                                <img src="assets/images/avatars/avatar-lg-3.jpg" class="rounded-lg w-full h-full object-cover inset-0" alt="">
+                                            </div>  
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5">
+                                    <a href="assets/images/avatars/avatar-lg-4.jpg"  data-caption="Caption">
+                                        <div class=" lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                                            <div class="w-full lg:h-64 aspect-[2.5/4] realtive">
+                                                <img src="assets/images/avatars/avatar-lg-4.jpg" class="rounded-lg w-full h-full object-cover inset-0" alt="">
+                                            </div>  
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5">
+                                    <a href="assets/images/avatars/avatar-lg-5.jpg"  data-caption="Caption">
+                                        <div class=" lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                                            <div class="w-full lg:h-64 aspect-[2.5/4] realtive">
+                                                <img src="assets/images/avatars/avatar-lg-5.jpg" class="rounded-lg w-full h-full object-cover inset-0" alt="">
+                                            </div>  
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="lg:w-1/5 sm:w-1/4 w-1/3 pr-3.5">
+                                    <div class="w-full lg:h-64 aspect-[2.5/4] bg-slate-200/60 rounded-lg animate-pulse"></div>
+                                </li>
+                            </ul>
+                        
+                            </div>
+                        
+                            <button type="button" class="absolute -translate-y-1/2 bg-white rounded-full top-1/2 -left-4 grid w-9 h-9 place-items-center shadow  dark:bg-dark3" uk-slider-item="previous"> <ion-icon name="chevron-back" class="text-2xl"></ion-icon></button>
+                            <button type="button" class="absolute -right-4 -translate-y-1/2 bg-white rounded-full top-1/2 grid w-9 h-9 place-items-center shadow  dark:bg-dark3" uk-slider-item="next"> <ion-icon name="chevron-forward" class="text-2xl"></ion-icon></button>
+                            
+                        </div>
+
+                    </div>
+
+
+                    <!-- post list  -->
+
+                    <div class="mt-8">
+
+                        <!-- post heading -->
+                        <div class="flex items-center justify-between py-3">
+                            <h1 class="text-xl font-bold text-black dark:text-white">Posts</h1>
+
+                            <a href="#" class="text-sm font-semibold flex items-center gap-2">
+                                Show acheived  <ion-icon name="chevron-forward-outline"></ion-icon> 
+                            </a>
+                        </div>
+
+                        <!-- Post list -->
+                        <div class="grid lg:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3 mt-6"  uk-scrollspy="target: > div; cls: uk-animation-scale-up; delay: 100">
+                            
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-1.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-2.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-3.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-4.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-5.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a> 
+                            
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-4.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-1.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-3.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-1.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-3.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-2.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100"> 
+                                    <div class="relative overflow-hidden rounded-lg uk-transition-toggle">
+                                        <div class="relative w-full lg:h-60 h-full aspect-[3/3]">
+                                            <img src="assets/images/post/post-4.jpg" alt="" class="object-cover w-full h-full">
+                                        </div>
+                                        <div class="absolute inset-0 bg-white/5 backdrop-blur-sm uk-transition-fade">    
+                                            <div class="flex items-center justify-center gap-4 text-white w-full h-full">
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="heart-circle"></ion-icon> 152</div>
+                                                <div class="flex items-center gap-2"> <ion-icon class="text-2xl" name="chatbubble-ellipses"></ion-icon> 290</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+                            <!-- placeholders -->
+                            <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                            <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                            <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                            <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- load more -->
+                    <div class="flex justify-center my-6">
+                        <button type="button" class="bg-white py-2 px-5 rounded-full shadow-md font-semibold text-sm dark:bg-dark2">Load more...</button>
+                    </div>
+
+                </div>
+
+
+                
+                <!-- Reels  list -->
+                <div class="pt-16">
+
+
+                    <div    class="grid gap-3 lg:gap-4 lg:grid-cols-4 md:grid-cols-5 sm:grid-cols-3 grid-cols-2" 
+                            uk-scrollspy="target: > div; cls: uk-animation-scale-up; delay: 100;repeat:true">
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-1.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 14
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+                          
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                         
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-2.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 24
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-3.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 32
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-4.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 46
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+                        
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-3.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon>16
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-4.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 24
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+                          
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-5.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 38
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-1.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 33
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-1.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 62
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+                          
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-2.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 42
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-3.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 18
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+
+                        <!-- single reels -->
+                        <div class="lg:hover:scale-105 hover:shadow-lg hover:z-10 duration-500 delay-100">
+                        
+                            <a href="#">
+                                <div class="relative w-full lg:h-[270px] aspect-[2.5/4] overflow-hidden rounded-lg shrink-0">
+                                    
+                                    <img class="object-cover w-full h-full" src="assets/images/reels/reels-4.jpg" alt="">
+                                    
+                                    <div class="w-full bottom-0 absolute left-0 bg-gradient-to-t from-black/60 pt-20">
+                                        <div class="flex items-center gap-2.5 text-white p-3">
+                                            <ion-icon class="text-2xl" name="play-outline"></ion-icon> 29
+                                        </div>
+                                    </div>
+                            
+                                </div>
+                            </a>
+
+                        </div>
+                
+                   
+                        <!-- placeholders -->
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+
+                    </div>
+
+                    <!-- load more -->
+                    <div class="flex justify-center my-6">
+                        <button type="button" class="bg-white py-2 px-5 rounded-full shadow-md font-semibold text-sm dark:bg-dark2">Load more...</button>
+                    </div>
+
+
+                </div>
+                
+
+
+
+
+                <!-- short list -->
+                <div class="pt-16">
+
+
+                    <div    class="grid lg:grid-cols-3 grid-cols-2 gap-4"
+                            uk-scrollspy="target: > div; cls: uk-animation-scale-up; delay: 100;repeat:true">
+
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-5.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> Monroe Parker </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 md:m-2.5 m-1">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-1.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white">  Jesse Steeve </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-2.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> Martin Gray </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                    
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-3.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-4.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> John Michael </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-4.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-7.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> Alexa stella </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-5.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-5.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> Monroe Parker </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-1.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-2.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white">  Jesse Steeve </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-2.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-3.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> Martin Gray </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                    
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-3.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        <div class="relative lg:rounded-xl rounded-md overflow-hidden shadow bg-white dark:bg-dark2">
+
+                            <!-- heading -->
+                            <div class="flex items-center gap-3 sm:px-4 py-3 p-2 text-sm font-normal">
+
+                                <a href="profile.html" class="max-md:hidden">
+                                    <img src="assets/images/avatars/avatar-4.jpg" alt="" class="w-6 h-6 rounded-full">
+                                </a>
+                                <div class="flex-1">
+                                    <a href="profile.html"><h4 class="text-black dark:text-white"> John Michael </h4></a> 
+                                </div>
+
+                                <!-- dropdown options -->
+                                <div class="absolute top-0.5 right-0 m-2.5">
+                                    <button type="button" class="button__ico w-8 h-8"> <ion-icon class="text-xl" name="ellipsis-horizontal"></ion-icon> </button>
+                                    <div  class="w-[232px]" uk-dropdown="pos: bottom-right; animation: uk-animation-scale-up uk-transform-origin-top-right; animate-out: true; mode: click">
+                                        <nav> 
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="bookmark-outline"></ion-icon> Add favorites </a>   
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="flag-outline"></ion-icon>  Report </a>  
+                                            <a href="#"> <ion-icon class="text-xl shrink-0" name="share-outline"></ion-icon>  Share </a>  
+                                            <hr>
+                                            <a href="#" class="text-red-400 hover:!bg-red-50 dark:hover:!bg-red-500/50"> <ion-icon class="text-xl shrink-0" name="stop-circle-outline"></ion-icon> Remove </a>  
+                                        </nav>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                            <!-- post image -->
+                            <a href="#preview_modal" uk-toggle="">
+                                <div class="relative w-full h-48">
+                                    <img src="assets/images/post/post-4.jpg" alt="" class="w-full h-full object-cover inset-0">
+                                </div>
+                            </a>
+                    
+                            <!-- post icons -->
+                            <div class="flex items-center md:gap-3 gap-1 md:py-2.5 md:px-3 p-1.5">
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="heart-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico"> <ion-icon class="md:text-2xl text-lg" name="chatbubble-ellipses-outline"></ion-icon> </button>
+                                <button type="button" class="button__ico ml-auto"> <ion-icon class="md:text-2xl text-lg" name="bookmark-outline"></ion-icon> </button>
+                            </div>
+
+                        </div>
+
+                        
+                        <!-- placeholders -->
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+                        <div class="w-full lg:h-60 h-full aspect-[3/3] bg-slate-200/60 rounded-lg dark:bg-dark2 animate-pulse"></div>
+
+                    </div>
+
+                    <!-- load more -->
+                    <div class="flex justify-center my-6">
+                        <button type="button" class="bg-white py-2 px-5 rounded-full shadow-md font-semibold text-sm dark:bg-dark2">Load more...</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        
+    </div>
+
+
+</main>
+
+{% endblock content %}
