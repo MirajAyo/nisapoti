@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-t99e(uvt^7!$_t^*qc0f&9!ov@5f163n&ngmi^s$c6ou$+@^))
 DEBUG = True
 
 # ALLOWED_HOSTS = ["127.0.0.1", "192.168.43.51", "localhost"]
-ALLOWED_HOSTS = ["127.0.0.1" ,"192.168.137.1" ,"localhost"]
+ALLOWED_HOSTS = ["69.10.60.180", "localhost"]
 # ALLOWED_HOSTS = ["127.0.0.1" ,"192.168.1.198" ,"localhost"]
 
 
@@ -124,7 +124,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Ensure this points to the correct directory
 
-
+STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

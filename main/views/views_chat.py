@@ -21,7 +21,7 @@ import random
 from django.contrib.auth.models import User, auth
 # from .forms import CartForm
 
-import winsound  # For Windows only, use appropriate library for your OS
+#import winsound  # For Windows only, use appropriate library for your OS
 from django.conf import settings
 import os
 
