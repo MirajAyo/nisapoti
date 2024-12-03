@@ -183,7 +183,28 @@ def settings(request):
         return render(request, 'settings.html', {
             'user_profile': user_profile,
         })
+  
+  
+def update_profile_image(request):
+    if request.method == 'POST':
+        user_profile = request.user.profile  # Assuming a OneToOne relation with Profile
+        new_image = request.FILES.get('profileimg')
+        
+        if new_image:
+            # Delete the old image if it's not the default
+            if user_profile.profileimg.name != 'default.jpg':
+                old_image_path = os.path.join(settings.MEDIA_ROOT, str(user_profile.profileimg))
+                if os.path.exists(old_image_path):
+                    os.remove(old_image_path)
+            
+            # Update with the new image
+            user_profile.profileimg = new_image
+            user_profile.save()
+            messages.success(request, "Profile image updated successfully!")
+        else:
+            messages.error(request, "No image selected!")
     
+    return redirect('profile_view')  # Replace with the appropriate redirect
     
 @login_required
 def withdraw_funds(request):

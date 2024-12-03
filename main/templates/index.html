@@ -120,9 +120,20 @@
 
                     <!-- post icons -->
                     <div class="sm:p-4 p-2.5 flex items-center gap-4 text-xs font-semibold">
+                        
                         <div class="flex items-center gap-2.5">
-                            <button type="button" class="button__ico text-red-500 bg-red-100 dark:bg-slate-700"> <ion-icon class="text-lg" name="heart"></ion-icon> </button>
-                            <a href="#">1,380</a>
+                            <button type="button" id="like-btn" data-post-id="{{post.id}}" class="button__ico text-red-500 bg-red-100 dark:bg-slate-700"> <ion-icon class="text-lg" name="heart"></ion-icon> </button>
+                            <i id="like-count-{{ post.id }}">
+                                {% if post.no_of_likes == 0 %}
+                                    no like
+                                {% elif post.no_of_likes == 1 %}
+                                    1 like
+                                {% else %}
+                                    {{ post.no_of_likes }} likes
+                                {% endif %}
+
+                                
+                            </i>
                         </div>
                         <div class="flex items-center gap-3">
                             <a href="{% url 'post_detail' post.id %}" class="button__ico bg-slate-200/70 dark:bg-slate-700"> <ion-icon class="text-lg" name="chatbubble-ellipses"></ion-icon> </a>
@@ -401,8 +412,11 @@
         </div> 
 
     </div> 
+    
+   
 
 </main>
+{% include "include/models/post_preview_home.html" %}
 {% endblock content %}
 
 {% block script %}
@@ -458,6 +472,55 @@
     }
     
     
+</script>
+
+<!--like script-->
+<script>
+	$(document).ready(function() {
+		$('body').on('click', '#like-btn', function() {
+		  var button = $(this);
+		  var liked = button.data('liked') === 'true';
+		  var postId = button.data('post-id');
+		  var likeSound = document.getElementById('like-sound');
+		  var unlikeSound = document.getElementById('unlike-sound');
+	  
+		  console.log('Clicked like button for post:', postId);
+		  console.log('Current like status:', liked);
+	  
+		  $.ajax({
+			url: "{% url 'like_post' %}",
+			type: 'POST',
+			data: {
+			  'post_id': postId,
+			  'csrfmiddlewaretoken': '{{ csrf_token }}'
+			},
+			headers: {
+			  'X-Requested-With': 'XMLHttpRequest'
+			},
+			success: function(response) {
+			  console.log('AJAX response:', response);
+	  
+			  if (response.liked) {
+				button.html('<i class="fa fa-gear"></i>');
+				button.data('liked', 'true');
+				likeSound.play();  // Play like sound
+			  } else {
+				button.html('<i class="fa fa-heart"></i>');
+				button.data('liked', 'false');
+				unlikeSound.play();  // Play unlike sound
+			  }
+	  
+			  var likeCount = response.no_of_likes;
+			  var likeText = likeCount === 0 ? 'no like' : likeCount === 1 ? 'like' : 'likes';
+			  $('#like-count-' + postId).text(likeCount + ' ' + likeText);
+			},
+			error: function(response) {
+			  console.error('AJAX error:', response);
+			  alert('An error occurred');
+			}
+		  });
+		});
+	  });
 </script>
 {% endblock script %}
 

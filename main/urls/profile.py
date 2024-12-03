@@ -11,6 +11,7 @@ urlpatterns = [
     path('search', views_profile.search, name='search'),
     path('settings', views_profile.settings, name='settings'),
     path('<str:pk>/', views_profile.profile, name='profile'),
+    path('update-profile-image/', views_profile.update_profile_image, name='update_profile_image'),
 
     
 ]

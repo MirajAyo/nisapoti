@@ -14,13 +14,17 @@
           
           <div class="flex md:gap-8 gap-4 items-center md:p-10 p-6">
 
-
               <div class="relative md:w-20 md:h-20 w-12 h-12 shrink-0"> 
 
-                  <label for="file" class="cursor-pointer">
-                      <img id="img" src="{{user_profile.profileimg.url}}" class="object-cover w-full h-full rounded-full" alt=""/>
-                      <input type="file" id="file" class="hidden" />
-                  </label>
+                <label for="file" class="cursor-pointer">
+                    <!-- Display the current profile image -->
+                    <img id="img" src="{{ user_profile.profileimg.url }}" class="object-cover w-full h-full rounded-full" alt="Profile Image" />
+                
+                    <!-- Hidden file input for selecting a new image -->
+                    <input type="file" id="file" name="image" class="hidden" accept="image/*" />
+                </label>
+                  
+                  
 
                   <label for="file" class="md:p-1 p-0.5 rounded-full bg-slate-600 md:border-4 border-white absolute -bottom-2 -right-2 cursor-pointer dark:border-slate-700">
 
@@ -82,8 +86,18 @@
                 <form method="POST" enctype="multipart/form-data" action="{% url 'settings' %}">
                     {% csrf_token %}
                   <div>
+                    
                       
                     <div class="space-y-6">
+                    
+                        <!-- image -->
+                        <div class="md:flex items-center gap-10">
+                            <label class="md:w-32 text-right"> Image </label>
+                            <div class="flex-1 max-md:mt-4">
+                                <input type="file" name="image" id="image" value="{{ user_profile.user.username }}" class="object-cover w-full h-full rounded-full" alt="Profile Image">
+                            </div>
+                        </div>
+                        
                         <!-- Username -->
                         <div class="md:flex items-center gap-10">
                             <label class="md:w-32 text-right"> Username </label>
@@ -654,3 +668,22 @@
 </main>
 {% endblock content %}
 
+{% block script %}
+    <script>
+        document.getElementById('file').addEventListener('change', function (event) {
+            const file = event.target.files[0]; // Get the selected file
+            const imgPreview = document.getElementById('img'); // Get the <img> tag
+    
+            if (file) {
+                const reader = new FileReader();
+    
+                // Load the selected image file and set it as the source for the <img> tag
+                reader.onload = function (e) {
+                    imgPreview.src = e.target.result; // Set the image preview
+                };
+    
+                reader.readAsDataURL(file); // Read the file as a data URL
+            }
+        });
+    </script>
+}{% endblock script %}

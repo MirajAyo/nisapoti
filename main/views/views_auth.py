@@ -133,14 +133,17 @@ def index(request):
 
     context = {
         'notifications': notifications,
-        'user_profile': user_profile, 
-        'posts': feed_list, 
-        'suggestions_username_profile_list': suggestions_username_profile_list,
+    'user_profile': user_profile, 
+    'posts': feed_list, 
+    'suggestions_username_profile_list': suggestions_username_profile_list,
         
         
     }
 
     return render(request, 'index.html',context)
+
+
+
 
 
 def root(request):

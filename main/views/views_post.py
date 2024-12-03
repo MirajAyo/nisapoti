@@ -39,6 +39,10 @@ def upload(request):
 
 
 
+# def post_detail(request, post_id):
+#     post = Post.objects.get(id=post_id)  # Get the specific post
+#     return render(request, 'index.html', {'post': post})
+
 
 @login_required(login_url='signin')
 def like_post(request):
